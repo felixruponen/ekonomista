@@ -45,10 +45,6 @@ public class AddTransactionFragment extends Fragment implements Button.OnClickLi
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
-		
-		
-		
 	}
 	
 	@Override
