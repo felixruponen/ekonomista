@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="drawer_options">
+        <item>Add Transaction</item>
+        <item>Overview</item>
+        <item>Details</item>
+    </string-array>
+    
+</resources>

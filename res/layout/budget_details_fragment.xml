@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+    <ImageView 
+        android:id="@+id/imgContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       	android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+    
+    
+	<TextView 
+	    android:id="@+id/txtTitle"
+	    android:textSize="@dimen/activity_text_size"
+	    android:textColor="#000"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	   android:layout_below="@id/imgContainer"
+        android:text="Title"
+	    />
+    
+	<TextView 
+	    android:id="@+id/txtAmount"
+	    android:textSize="@dimen/activity_text_size"
+	    android:textColor="#000"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	            android:layout_below="@id/txtTitle"
+        android:layout_centerHorizontal="true"
+        android:text="Title"
+	   />
+	
+	<TextView 
+	    android:id="@+id/txtDate"
+	    android:textSize="@dimen/activity_text_size"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/txtAmount"
+        android:layout_centerHorizontal="true"
+        android:text="Title"
+	    />
+	
+	<TextView 
+	    android:id="@+id/txtType"
+	    android:textSize="@dimen/activity_text_size"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	            android:layout_below="@id/txtDate"
+        android:layout_centerHorizontal="true"
+        android:text="Title"
+	    />
+	
+	<TextView 
+	    android:id="@+id/txtCategory"
+	    android:textSize="@dimen/activity_text_size"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/txtType"
+        android:layout_centerHorizontal="true"
+        android:text="Title"
+	   />
+	
+</RelativeLayout>
