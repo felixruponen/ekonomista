@@ -10,6 +10,8 @@ import android.view.View;
 
 public class DiagramView extends View {
 
+
+
 	Paint mPaint = new Paint();
 	Rect rect = new Rect();
 	
@@ -30,36 +32,40 @@ public class DiagramView extends View {
 	public DiagramView(Context context) {
 		super(context);
 		
-
-		init(context);
-		
 	}
 	
 	public DiagramView(Context context, AttributeSet attr) {
 		super(context, attr);
-		
-		init(context);
-		
+				
 	}
 	
 	public DiagramView(Context context, AttributeSet attr, int defStyleAttr) {
 		super(context, attr, defStyleAttr);
 		
-		init(context);
 	}
 	
-	private void init(Context context){
-		db = new DBTools(context);
-		
-		mIncome = db.getTotalIncome();
-		mExpense = db.getTotalExpense();
-		
+	private void init(){		
 		mDiagramSize = (int)mIncome + (int)mExpense;
 		mIncomeProcent = mIncome / mDiagramSize;
 		mExpenseProcent = mExpense / mDiagramSize;
 		mIncomeHeight = (int) (mIncomeProcent * DIAGRAM_HEIGHT);
 		mExpenseHeight = (int) (mExpenseProcent * DIAGRAM_HEIGHT);
 		
+		
+		
+	}
+	
+	public void setDiagram(double income, double expense){
+		mIncome = income;
+		mExpense = expense;
+		
+		init();	
+	}
+	
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {		
+			
+		setMeasuredDimension(DIAGRAM_WIDTH + START_X, DIAGRAM_HEIGHT + START_Y);
 	}
 	
 	@Override

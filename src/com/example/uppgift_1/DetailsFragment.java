@@ -25,6 +25,14 @@ public class DetailsFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View theView = inflater.inflate(R.layout.details_fragment, container, false);
 		
+		DBTools db = new DBTools(getActivity());
+		
+		double income = db.getTotalIncome();
+		double expense = db.getTotalExpense();
+		
+		DiagramView diagram = (DiagramView) theView.findViewById(R.id.diagram_view);
+		
+		diagram.setDiagram(income, expense);
 		
 		return theView;
 	}
