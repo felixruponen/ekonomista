@@ -17,7 +17,7 @@ import android.util.Log;
 
 public class LoadThumbnailsAsync extends AsyncTask<ArrayList<String>, Integer, String> {
 
-	private static final int THUMBNAIL_SIZE = 96;
+	private static final int THUMBNAIL_SIZE = 256;
 	Context context;
 	ProgressDialog pd;
 	
@@ -31,6 +31,7 @@ public class LoadThumbnailsAsync extends AsyncTask<ArrayList<String>, Integer, S
 		
 		pd = new ProgressDialog(context);
 		pd.setTitle("Loading bitmaps..");
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		pd.show();
 		
 	}
@@ -48,7 +49,7 @@ public class LoadThumbnailsAsync extends AsyncTask<ArrayList<String>, Integer, S
 	@Override
 	protected void onProgressUpdate(Integer... values) {
 
-		super.onProgressUpdate(values);
+		pd.setProgress(values[0]);
 	}
 
 	@Override
@@ -58,12 +59,17 @@ public class LoadThumbnailsAsync extends AsyncTask<ArrayList<String>, Integer, S
 		
 		ArrayList<String> images = params[0];
 		
+
+		
 		if(images.size() != 0){		
-			for(String image : images){
+			
+			pd.setMax(images.size());
+			
+			for(int i = 0; i < images.size(); i++){
 				
-				Log.d("IMAGE: ", image);
+				Log.d("IMAGE: ", images.get(i));
 				
-				String[] temp = image.split("\\.");
+				String[] temp = images.get(i).split("\\.");
 				
 				String thumbPath = temp[0] + "_thumb" + "." + temp[1];
 				
@@ -71,7 +77,7 @@ public class LoadThumbnailsAsync extends AsyncTask<ArrayList<String>, Integer, S
 				
 				if(!thumbFile.exists()){
 					
-					File file = new File(image);
+					File file = new File(images.get(i));
 					
 					Bitmap thumb = getPreview(file.toURI());
 					
@@ -88,7 +94,8 @@ public class LoadThumbnailsAsync extends AsyncTask<ArrayList<String>, Integer, S
 						e.printStackTrace();
 					}
 					
-				}
+				}		
+				publishProgress(i);
 				
 			}
 		}
