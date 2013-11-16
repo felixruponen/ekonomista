@@ -323,6 +323,40 @@ public class DBTools extends SQLiteOpenHelper {
 		return transactionMap;
 	}
 
+	
+	public double getTotalIncome(){
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		double result = -1;
+		
+		String query = "SELECT sum(" + TRANSACTION_AMOUNT + ") FROM transaction_entry WHERE " + TRANSACTION_TYPE + "= '" + TRANSACTION_TYPE_INCOME + "'";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if(cursor.moveToFirst()){
+			
+			result = cursor.getDouble(0);			
+		}
+		
+		return result;
+	}
+	
+	public double getTotalExpense(){
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		double result = -1;
+		
+		String query = "SELECT sum(" + TRANSACTION_AMOUNT + ") FROM transaction_entry WHERE " + TRANSACTION_TYPE + "= '" + TRANSACTION_TYPE_EXPENSE + "'";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if(cursor.moveToFirst()){
+			
+			result = cursor.getDouble(0);			
+		}
+		
+		return result;
+	}
 
 	public String getTransactionTitle(int position) {
 		SQLiteDatabase db = this.getReadableDatabase();

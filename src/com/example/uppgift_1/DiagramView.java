@@ -18,20 +18,41 @@ public class DiagramView extends View {
 	
 	private static final int START_X = 40;
 	private static final int START_Y = 20;
-
+	
+	private int mDiagramStep;
+	
+	private double mIncome, mExpense;
+	
+	DBTools db;	
 	
 	public DiagramView(Context context) {
 		super(context);
+		
+
+		init(context);
 		
 	}
 	
 	public DiagramView(Context context, AttributeSet attr) {
 		super(context, attr);
 		
+		init(context);
+		
 	}
 	
 	public DiagramView(Context context, AttributeSet attr, int defStyleAttr) {
 		super(context, attr, defStyleAttr);
+		
+		init(context);
+	}
+	
+	private void init(Context context){
+		db = new DBTools(context);
+		
+		mIncome = db.getTotalIncome();
+		mExpense = db.getTotalExpense();
+		
+		mDiagramStep = (mIncome > mExpense) ? (int)mIncome / DIAGRAM_HEIGHT : (int)mExpense / DIAGRAM_HEIGHT;
 		
 	}
 	
@@ -55,6 +76,8 @@ public class DiagramView extends View {
 		canvas.drawLine(START_X, START_Y + DIAGRAM_HEIGHT, START_X + DIAGRAM_WIDTH, START_Y + DIAGRAM_HEIGHT, mPaint);
 		
 		
+		canvas.drawText("Your income: " + String.valueOf(mIncome), START_X + 50, START_Y + DIAGRAM_HEIGHT + 30, mPaint);
+		canvas.drawText("Your expense: " + String.valueOf(mExpense), START_X + 50, START_Y + DIAGRAM_HEIGHT + 50, mPaint);
 		
 		// Rita staplar!
 		mPaint.setColor(Color.BLUE);
