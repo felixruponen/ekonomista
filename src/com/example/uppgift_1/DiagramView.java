@@ -19,9 +19,11 @@ public class DiagramView extends View {
 	private static final int START_X = 40;
 	private static final int START_Y = 20;
 	
-	private int mDiagramStep;
+	private int mDiagramSize;
 	
 	private double mIncome, mExpense;
+	private double mIncomeProcent, mExpenseProcent;
+	private int mIncomeHeight, mExpenseHeight;
 	
 	DBTools db;	
 	
@@ -52,36 +54,37 @@ public class DiagramView extends View {
 		mIncome = db.getTotalIncome();
 		mExpense = db.getTotalExpense();
 		
-		mDiagramStep = (mIncome > mExpense) ? (int)mIncome / DIAGRAM_HEIGHT : (int)mExpense / DIAGRAM_HEIGHT;
+		mDiagramSize = (int)mIncome + (int)mExpense;
+		mIncomeProcent = mIncome / mDiagramSize;
+		mExpenseProcent = mExpense / mDiagramSize;
+		mIncomeHeight = (int) (mIncomeProcent * DIAGRAM_HEIGHT);
+		mExpenseHeight = (int) (mExpenseProcent * DIAGRAM_HEIGHT);
 		
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		
-		
-		
-		
+				
 		// Rita Graf
 		mPaint.setColor(Color.BLACK);
 		
 		// Y
 		canvas.drawLine(START_X, START_Y, START_X, START_Y + DIAGRAM_HEIGHT, mPaint);
-		
-
-		
-		
+			
 		// X
 		canvas.drawLine(START_X, START_Y + DIAGRAM_HEIGHT, START_X + DIAGRAM_WIDTH, START_Y + DIAGRAM_HEIGHT, mPaint);
-		
-		
+				
 		canvas.drawText("Your income: " + String.valueOf(mIncome), START_X + 50, START_Y + DIAGRAM_HEIGHT + 30, mPaint);
 		canvas.drawText("Your expense: " + String.valueOf(mExpense), START_X + 50, START_Y + DIAGRAM_HEIGHT + 50, mPaint);
 		
 		// Rita staplar!
 		mPaint.setColor(Color.BLUE);
-		rect.set(START_X + 20, START_Y, START_X + 100, START_Y + DIAGRAM_HEIGHT);
+		rect.set(START_X + 20, START_Y + (DIAGRAM_HEIGHT - mIncomeHeight), START_X + 100, START_Y + DIAGRAM_HEIGHT);
+		canvas.drawRect(rect, mPaint);
+		
+		mPaint.setColor(Color.RED);
+		rect.set(START_X + 120, START_Y + (DIAGRAM_HEIGHT - mExpenseHeight), START_X + 200, START_Y + DIAGRAM_HEIGHT);
 		canvas.drawRect(rect, mPaint);
 	}
 
