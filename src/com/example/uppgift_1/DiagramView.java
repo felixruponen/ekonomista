@@ -36,7 +36,9 @@ public class DiagramView extends View {
 	
 	public DiagramView(Context context, AttributeSet attr) {
 		super(context, attr);
-				
+		
+	
+		
 	}
 	
 	public DiagramView(Context context, AttributeSet attr, int defStyleAttr) {
@@ -63,9 +65,8 @@ public class DiagramView extends View {
 	}
 	
 	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {		
-			
-		setMeasuredDimension(DIAGRAM_WIDTH + START_X, DIAGRAM_HEIGHT + START_Y);
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		setMeasuredDimension(DIAGRAM_WIDTH + START_X + getPaddingLeft() + getPaddingRight(), DIAGRAM_HEIGHT + START_Y + getPaddingBottom() + getPaddingTop()  + 50);
 	}
 	
 	@Override
