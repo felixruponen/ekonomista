@@ -1,16 +1,22 @@
 package com.example.uppgift_1;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class DiagramView extends View {
 
 
+
+	boolean clicked;
 
 	Paint mPaint = new Paint();
 	Rect rect = new Rect();
@@ -26,6 +32,8 @@ public class DiagramView extends View {
 	private double mIncome, mExpense;
 	private double mIncomeProcent, mExpenseProcent;
 	private int mIncomeHeight, mExpenseHeight;
+	
+	ArrayList<IDrawable> drawables;
 	
 	DBTools db;	
 	
@@ -53,8 +61,14 @@ public class DiagramView extends View {
 		mIncomeHeight = (int) (mIncomeProcent * DIAGRAM_HEIGHT);
 		mExpenseHeight = (int) (mExpenseProcent * DIAGRAM_HEIGHT);
 		
+		drawables = new ArrayList<IDrawable>();
 		
-		
+		drawables.add(new BarDrawable(new Rect(START_X + 20, START_Y + (DIAGRAM_HEIGHT - mIncomeHeight), START_X + 100, START_Y + DIAGRAM_HEIGHT), new Paint(Color.BLUE)));
+		drawables.add(new BarDrawable(new Rect(START_X + 120, START_Y + (DIAGRAM_HEIGHT - mExpenseHeight), START_X + 200, START_Y + DIAGRAM_HEIGHT), new Paint(Color.RED)));
+		drawables.add(new TextDrawable("Your income: " + String.valueOf(mIncome), START_X + 50, START_Y + DIAGRAM_HEIGHT + 30, new Paint(Color.BLACK)));
+		drawables.add(new TextDrawable("Your expense: " + String.valueOf(mExpense), START_X + 50, START_Y + DIAGRAM_HEIGHT + 50, new Paint(Color.BLACK)));
+		drawables.add(new LineDrawable(START_X, START_Y, START_X, START_Y + DIAGRAM_HEIGHT, new Paint(Color.BLACK)));
+		drawables.add(new LineDrawable(START_X, START_Y + DIAGRAM_HEIGHT, START_X + DIAGRAM_WIDTH, START_Y + DIAGRAM_HEIGHT, new Paint(Color.BLACK)));
 	}
 	
 	public void setDiagram(double income, double expense){
@@ -65,6 +79,32 @@ public class DiagramView extends View {
 	}
 	
 	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		
+		switch(event.getAction()){
+		
+		case MotionEvent.ACTION_DOWN:
+			
+			float x = event.getX();			
+			float y = event.getY();
+			
+			if(x >= START_X + 20 && x <= START_X + 100 && y >= START_Y + (DIAGRAM_HEIGHT - mIncomeHeight) && y <= START_Y + DIAGRAM_HEIGHT){
+				clicked = true;
+				Log.i("DrawerView", "Clicked!");
+			}
+			
+			
+			break;
+		
+		
+		}
+		
+		
+		
+		return super.onTouchEvent(event);
+	}
+	
+	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		setMeasuredDimension(DIAGRAM_WIDTH + START_X + getPaddingLeft() + getPaddingRight(), DIAGRAM_HEIGHT + START_Y + getPaddingBottom() + getPaddingTop()  + 50);
 	}
@@ -72,27 +112,10 @@ public class DiagramView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-				
-		// Rita Graf
-		mPaint.setColor(Color.BLACK);
-		
-		// Y
-		canvas.drawLine(START_X, START_Y, START_X, START_Y + DIAGRAM_HEIGHT, mPaint);
-			
-		// X
-		canvas.drawLine(START_X, START_Y + DIAGRAM_HEIGHT, START_X + DIAGRAM_WIDTH, START_Y + DIAGRAM_HEIGHT, mPaint);
-				
-		canvas.drawText("Your income: " + String.valueOf(mIncome), START_X + 50, START_Y + DIAGRAM_HEIGHT + 30, mPaint);
-		canvas.drawText("Your expense: " + String.valueOf(mExpense), START_X + 50, START_Y + DIAGRAM_HEIGHT + 50, mPaint);
-		
-		// Rita staplar!
-		mPaint.setColor(Color.BLUE);
-		rect.set(START_X + 20, START_Y + (DIAGRAM_HEIGHT - mIncomeHeight), START_X + 100, START_Y + DIAGRAM_HEIGHT);
-		canvas.drawRect(rect, mPaint);
-		
-		mPaint.setColor(Color.RED);
-		rect.set(START_X + 120, START_Y + (DIAGRAM_HEIGHT - mExpenseHeight), START_X + 200, START_Y + DIAGRAM_HEIGHT);
-		canvas.drawRect(rect, mPaint);
+								
+		for(IDrawable drawable : drawables){
+			drawable.draw(canvas);
+		}		
 	}
 
 }
