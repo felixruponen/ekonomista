@@ -11,10 +11,23 @@
     tools:context=".BudgetFragment" >
 
 
+    <TextView
+        android:id="@+id/budget_balance"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        android:padding="4dp"
+        android:textColor="@color/budget_total_color"
+        android:layout_height="0dp"
+        android:background="#33b5e5"
+        android:layout_weight="10"
+        android:text="Balance"
+        android:layout_gravity="center_horizontal"
+        />
+    
 	    <FrameLayout 
 	        android:id="@+id/list_fragment_container"
 	        android:layout_width="match_parent"
-	        android:layout_weight="50"
+	        android:layout_weight="40"
 	        android:layout_height="0dp">
 	        
 	    </FrameLayout>

@@ -152,6 +152,11 @@ public class DBTools extends SQLiteOpenHelper {
 				
 				transactionMap.put(TRANSACTION_ID, cursor.getString(0));
 				transactionMap.put(TRANSACTION_NAME, cursor.getString(1));
+				transactionMap.put(TRANSACTION_DATE, cursor.getString(2));
+				transactionMap.put(TRANSACTION_AMOUNT, cursor.getString(3));
+				transactionMap.put(TRANSACTION_TYPE, cursor.getString(4));
+				transactionMap.put(TRANSACTION_CATEGORY, cursor.getString(5));
+				
 				
 				
 				transactionArrayList.add(transactionMap);
@@ -341,6 +346,39 @@ public class DBTools extends SQLiteOpenHelper {
 		db.close();
 		
 		return title;
+	}
+
+
+	public String getIncomeTotal() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		String result = "";
+		
+		String query = "SELECT sum(" + TRANSACTION_AMOUNT + ") FROM transaction_entry WHERE " + TRANSACTION_TYPE + "= '" + TRANSACTION_TYPE_INCOME + "'";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if(cursor.moveToFirst()){
+			result = cursor.getString(0);			
+		}
+		
+		return result;
+	}
+	
+	public String getExpenseTotal(){
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		String result = "";
+		
+		String query = "SELECT sum(" + TRANSACTION_AMOUNT + ") FROM transaction_entry WHERE " + TRANSACTION_TYPE + "= '" + TRANSACTION_TYPE_EXPENSE + "'";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if(cursor.moveToFirst()){
+			result = cursor.getString(0);			
+		}
+		
+		return result;
 	}
 		
 }

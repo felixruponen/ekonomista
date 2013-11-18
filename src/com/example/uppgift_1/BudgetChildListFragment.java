@@ -26,7 +26,7 @@ public class BudgetChildListFragment extends ListFragment{
 	@Override
 	public void onListItemClick(ListView l, View view, int position, long id) {
 		listener = (OnTransactionChanged) getParentFragment();
-		KeyValueObject item = (KeyValueObject)l.getItemAtPosition(position);
+		TransactionListItem item = (TransactionListItem)l.getItemAtPosition(position);
 		
 		Log.d("TRANSACTION INDEX: ", String.valueOf(item.getId()));
 		
@@ -42,17 +42,16 @@ public class BudgetChildListFragment extends ListFragment{
 		DBTools db = new DBTools(getActivity());
 		
 		ArrayList<HashMap<String, String>> transactions = db.getTransactions();
-		List<KeyValueObject> transactionList = new ArrayList<KeyValueObject>();
+		ArrayList<TransactionListItem> transactionList = new ArrayList<TransactionListItem>();
 		
 		for(HashMap<String, String> item : transactions){
-				transactionList.add(new KeyValueObject(Integer.parseInt(item.get(DBTools.TRANSACTION_ID)), item.get(DBTools.TRANSACTION_NAME)));		
+				transactionList.add(new TransactionListItem(Integer.parseInt(item.get(DBTools.TRANSACTION_ID)), item.get(DBTools.TRANSACTION_NAME), item.get(DBTools.TRANSACTION_AMOUNT), item.get(DBTools.TRANSACTION_TYPE)));		
 		}
 		
-				
-		ArrayAdapter<KeyValueObject> titleAdapter = new ArrayAdapter<KeyValueObject>(getActivity(), 
-				android.R.layout.simple_list_item_1, transactionList);
+		TransactionListAdapter adapter = new TransactionListAdapter(getActivity().getApplicationContext(), transactionList);	
 		
-		setListAdapter(titleAdapter);
+		
+		setListAdapter(adapter);
 		
 		
 	}

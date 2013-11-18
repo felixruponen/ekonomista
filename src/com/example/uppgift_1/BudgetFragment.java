@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class BudgetFragment extends Fragment implements OnTransactionChanged {
 
@@ -47,6 +48,13 @@ public class BudgetFragment extends Fragment implements OnTransactionChanged {
 		ft.commit();
 		
 		DBTools db = new DBTools(getActivity());
+		
+		TextView budgetBalance = (TextView) theView.findViewById(R.id.budget_balance);
+		
+		double incomeTotal = Double.parseDouble(db.getIncomeTotal());
+		double expenseTotal = Double.parseDouble(db.getExpenseTotal());
+		
+		budgetBalance.setText("Ditt konto har just nu: " + String.valueOf(incomeTotal - expenseTotal) + " kr");
 		
 		
 		
