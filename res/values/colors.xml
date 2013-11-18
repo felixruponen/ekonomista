@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="income_color">#2cabe2</color>
+    <color name="expense_color">#ff6b4f</color>
+    <color name="budget_total_color">#fff</color>
+</resources>
