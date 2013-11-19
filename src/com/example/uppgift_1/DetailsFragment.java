@@ -34,6 +34,9 @@ public class DetailsFragment extends Fragment {
 		
 		diagram.setDiagram(income, expense);
 		
+		
+		
+		
 		return theView;
 	}
 

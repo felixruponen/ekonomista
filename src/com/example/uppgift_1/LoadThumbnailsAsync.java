@@ -17,7 +17,7 @@ import android.util.Log;
 
 public class LoadThumbnailsAsync extends AsyncTask<ArrayList<String>, Integer, String> {
 
-	private static final int THUMBNAIL_SIZE = 256;
+	private static final int THUMBNAIL_SIZE = 216;
 	Context context;
 	ProgressDialog pd;
 	

@@ -16,9 +16,6 @@ import android.view.View.MeasureSpec;
 public class DiagramView extends View implements OnDrawableTouchedListener {
 
 
-
-	boolean clicked;
-
 	Paint mPaint = new Paint();
 	Rect rect = new Rect();
 	
@@ -44,19 +41,19 @@ public class DiagramView extends View implements OnDrawableTouchedListener {
 	
 	public DiagramView(Context context) {
 		super(context);
-		
+		init();
 	}
 	
 	public DiagramView(Context context, AttributeSet attr) {
 		super(context, attr);
 		
-	
+		init();
 		
 	}
 	
 	public DiagramView(Context context, AttributeSet attr, int defStyleAttr) {
 		super(context, attr, defStyleAttr);
-		
+		init();
 	}
 	
 	private void init(){		
@@ -99,11 +96,6 @@ public class DiagramView extends View implements OnDrawableTouchedListener {
 			float x = event.getX();			
 			float y = event.getY();
 			
-			//if(x >= START_X + 20 && x <= START_X + 100 && y >= START_Y + (DIAGRAM_HEIGHT - mIncomeHeight) && y <= START_Y + DIAGRAM_HEIGHT){
-			//	clicked = true;
-			//	Log.i("DrawerView", "Clicked!");
-			//}
-			
 			for(IDrawable drawable : drawables){
 				drawable.isClicked(x, y);
 			}
@@ -130,7 +122,7 @@ public class DiagramView extends View implements OnDrawableTouchedListener {
 	}
 	
 	private int getHeightMeasure(int heightMeasureSpec) {
-		int desired = 500;
+		int desired = DIAGRAM_HEIGHT + START_Y + 60;
 		
 		int mode = MeasureSpec.getMode(heightMeasureSpec);
 		int size = MeasureSpec.getSize(heightMeasureSpec);

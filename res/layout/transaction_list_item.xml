@@ -11,6 +11,8 @@
         android:textSize="22sp"
         android:layout_width="0dp"
         android:layout_gravity="right"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_height="wrap_content"
         android:text="Title"/>
     
@@ -18,6 +20,8 @@
         android:id="@+id/transaction_item_amount"
         android:layout_weight="20"
         android:layout_width="0dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="Amount"/>

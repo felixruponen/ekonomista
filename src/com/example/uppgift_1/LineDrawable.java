@@ -7,6 +7,7 @@ public class LineDrawable implements IDrawable{
 
 	int startX, startY, stopX, stopY;
 	Paint paint;
+
 	
 	public LineDrawable(int startX, int startY, int stopX, int stopY, Paint paint){
 		this.startX = startX;
