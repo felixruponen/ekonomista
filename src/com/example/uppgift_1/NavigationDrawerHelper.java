@@ -56,7 +56,7 @@ public class NavigationDrawerHelper {
 			
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
-			mDrawerToggle = new ActionBarDrawerToggle(theActivity, mDrawerLayout, R.drawable.ic_drawer, R.string.open_drawer_message, R.string.closed_drawer_message)
+			mDrawerToggle = new ActionBarDrawerToggle(theActivity, mDrawerLayout, R.drawable.ic_navigation_drawer, R.string.open_drawer_message, R.string.closed_drawer_message)
 			{
 				@Override
 				public void onDrawerOpened(android.view.View drawerView) {
