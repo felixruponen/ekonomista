@@ -37,7 +37,8 @@ public class DiagramView extends View implements OnDrawableTouchedListener {
 	
 	ArrayList<IDrawable> drawables;
 	
-	DBTools db;	
+	DBTools db;
+	private OnDiagramBarClicked listener;	
 	
 	public DiagramView(Context context) {
 		super(context);
@@ -172,13 +173,22 @@ public class DiagramView extends View implements OnDrawableTouchedListener {
 		switch(drawable.getIdentifier()){
 		case BAR_EXPENSE_IDENTIFIER:
 				Log.i("DiagramView", "Expensebar clicked!");
+				if(listener != null)
+					listener.onDiagramBarClicked(x, y, "ExpenseBar");
+				
 			break;
 			
 		case BAR_INCOME_IDENTIFIER:
 				Log.i("DiagramView", "Incomebar clicked!");
+				if(listener != null)
+					listener.onDiagramBarClicked(x, y, "IncomeBar!");
 			break;
 		}
 		
+	}
+
+	public void setOnDiagramBarClickedListener(OnDiagramBarClicked listener) {
+		this.listener = listener;		
 	}
 
 }

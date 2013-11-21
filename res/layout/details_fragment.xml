@@ -13,10 +13,6 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"/>
 	
-	<com.example.uppgift_1.DateSliderView
-	    android:id="@+id/date_slider"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/diagram_view" />
+
 
 </RelativeLayout>

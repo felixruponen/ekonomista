@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends Fragment implements OnDiagramBarClicked {
 
 	
 	@Override
@@ -33,11 +33,19 @@ public class DetailsFragment extends Fragment {
 		DiagramView diagram = (DiagramView) theView.findViewById(R.id.diagram_view);
 		
 		diagram.setDiagram(income, expense);
+		diagram.setOnDiagramBarClickedListener(this);
 		
 		
 		
 		
 		return theView;
+	}
+
+	@Override
+	public void onDiagramBarClicked(float x, float y, String text) {
+			
+		InformationBubbleView info = new InformationBubbleView(getActivity());
+		info.setPosition(x, y, text);
 	}
 
 }
