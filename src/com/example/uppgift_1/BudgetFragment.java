@@ -73,6 +73,9 @@ public class BudgetFragment extends Fragment implements OnTransactionChanged {
 		mViewPager = (ViewPager) theView.findViewById(R.id.pager);
 		mViewPager.setAdapter(mPagerAdapter);
 		
+		
+				
+		
 		return theView;
 	}
 

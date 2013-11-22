@@ -1,14 +1,22 @@
 package com.example.uppgift_1;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
-public class DetailsFragment extends Fragment implements OnDiagramBarClicked {
+public class DetailsFragment extends Fragment implements OnDiagramBarClicked, DateSeekBarChangeListener {
 
+	
+	SeekBar seekStart, seekStop;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,8 +43,15 @@ public class DetailsFragment extends Fragment implements OnDiagramBarClicked {
 		diagram.setDiagram(income, expense);
 		diagram.setOnDiagramBarClickedListener(this);
 		
+		CustomSeekBar seekBar = (CustomSeekBar) theView.findViewById(R.id.details_seek_start);
 		
+		seekBar.setOnDateSeekBarChangeListener(this);
 		
+		ArrayList<Date> dates = new ArrayList<Date>();
+		dates.add(new Date(2013, 11, 22));
+		dates.add(new Date(2011, 12, 11));
+		
+		seekBar.setDates(dates);
 		
 		return theView;
 	}
@@ -44,8 +59,12 @@ public class DetailsFragment extends Fragment implements OnDiagramBarClicked {
 	@Override
 	public void onDiagramBarClicked(float x, float y, String text) {
 			
-		InformationBubbleView info = new InformationBubbleView(getActivity());
-		info.setPosition(x, y, text);
+	}
+
+	@Override
+	public void onDateSeekBarChangeListener(Date date) {
+		Toast t = Toast.makeText(getActivity(), date.toString(), Toast.LENGTH_SHORT);
+		t.show();
 	}
 
 }

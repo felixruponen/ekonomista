@@ -24,6 +24,8 @@
         android:layout_gravity="center_horizontal"
         />
     
+
+    	    
 	    <FrameLayout 
 	        android:id="@+id/list_fragment_container"
 	        android:layout_width="match_parent"
