@@ -2,13 +2,16 @@ package com.example.uppgift_1;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 
 public class DetailsFragment extends Fragment implements OnDiagramBarClicked {
 
+	ViewGroup root;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class DetailsFragment extends Fragment implements OnDiagramBarClicked {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View theView = inflater.inflate(R.layout.details_fragment, container, false);
+		
+		root = (ViewGroup) theView.findViewById(R.id.details_root);
 		
 		DBTools db = new DBTools(getActivity());
 		
@@ -46,6 +51,13 @@ public class DetailsFragment extends Fragment implements OnDiagramBarClicked {
 			
 		InformationBubbleView info = new InformationBubbleView(getActivity());
 		info.setPosition(x, y, text);
+		
+		LayoutParams lp = new LayoutParams(root.getWidth(), root.getHeight());
+		lp.height = LayoutParams.WRAP_CONTENT;
+		lp.width = LayoutParams.WRAP_CONTENT;
+		
+		root.addView(info);
+
 	}
 
 }

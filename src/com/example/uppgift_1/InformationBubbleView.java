@@ -24,7 +24,9 @@ public class InformationBubbleView extends View {
 	}
 	
 	public void setPosition(float x, float y, String text){
-		
+		Log.i("InformationBubble", "X : " + x);
+		Log.i("InformationBubble", "Y : " + y);
+		Log.i("InformationBubble", "Text : " + text);
 		drawable = new BubbleDrawable(x, y, radius, new Paint(Color.CYAN), text);
 	}
 	
