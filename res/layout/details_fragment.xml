@@ -1,17 +1,24 @@
 
 
-    <FrameLayout 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    	xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/details_root"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+
     
 	<com.example.uppgift_1.DiagramView 
 	    android:id="@+id/diagram_view"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"/>
-	
-	</FrameLayout>
 
+
+	<com.example.uppgift_1.CustomSeekBar
+	    android:id="@+id/details_seek_start"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/diagram_view" />
+
+	<SeekBar
+	    android:id="@+id/details_seek_stop"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/seekBar1" />
 

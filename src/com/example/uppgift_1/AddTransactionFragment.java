@@ -62,8 +62,7 @@ public class AddTransactionFragment extends Fragment implements Button.OnClickLi
 		setSpinnerAdapter(DBTools.TRANSACTION_TYPE_INCOME);
 		
 		imageAbsoulutePath = "";
-		
-		
+				
 		btnAdd = (Button) theView.findViewById(R.id.btnAdd);
 		btnAdd.setOnClickListener(this);
 		
@@ -175,6 +174,7 @@ public class AddTransactionFragment extends Fragment implements Button.OnClickLi
 			
 			camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(image));
 			startActivityForResult(camera, PICTURE_RESULT);
+			
 			
 			
 
